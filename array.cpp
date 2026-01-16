@@ -15,25 +15,85 @@ class Tab {
         ~Tab() {delete[] array;}
 
         int len() {
-            cout << "rozmiar: " << size << endl;
-            return size;
+            cout << "rozmiar: " << number_of_elements << endl;
+            return number_of_elements;
         }
+
         void print() {
-            for(int i = 0; i < size; i++){
+            for(int i = 0; i < number_of_elements; i++){
                 cout << array[i] << endl;
             }
         }
+
         void append(int element) {
             if(size == number_of_elements) {resize();}
 
             array[number_of_elements] = element;
             number_of_elements++;
         }
+
         void pop() {
             number_of_elements--;
         }
-        
 
+        void remove(int element) {
+            int position;
+            for(int i = 0; i < number_of_elements; i++) {
+                if(array[i] == element) {
+                    position = i;
+                    break;
+                }
+            }
+            for(int i = position; i < number_of_elements; i++) {
+                array[i] = array[i+1];
+            }
+            number_of_elements--;
+        }
+
+        void clear() {
+            number_of_elements = 0;
+        }
+
+        int count(int element) {
+            int counter = 0;
+            for(int i = 0; i < number_of_elements; i++) {
+                if(array[i] == element) {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
+        void insert(int element, int position) {
+            position--;
+            if(size == number_of_elements) {resize();}
+
+            for(int i = number_of_elements; i > 0; i--){
+                if(i < position) {
+                   break;
+                }
+                array[i+1] = array[i];
+            }
+            array[position] = element;
+            number_of_elements++;
+        }
+        
+        void reverse() {
+            if(number_of_elements % 2 == 0) {
+                for(int i = 0; i < number_of_elements / 2; i++) {
+                    int temp = array[i];
+                    array[i] = array[number_of_elements - i - 1];
+                    array[number_of_elements - i - 1] = temp;
+                }
+            } else {
+                for(int i = 0; i < (number_of_elements - 1) / 2; i++) {
+                    int temp = array[i];
+                    array[i] = array[number_of_elements - i - 1];
+                    array[number_of_elements - i - 1] = temp;
+                }
+            }
+        }
+        
     private:
         void resize() {
                 int* new_array = new int[size+=1];
@@ -49,13 +109,15 @@ class Tab {
 
 int main() {
     Tab tablica(2);
-    tablica.len();
     tablica.append(1);
+    tablica.append(2);
+    tablica.append(3);
+    tablica.append(4);
     tablica.append(5);
     tablica.print();
-    tablica.len();
-    tablica.append(5);
-    tablica.len();
+    cout << "---------" << endl;
+    tablica.reverse();
+    tablica.print();
 
     return 0;
 }
