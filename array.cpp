@@ -94,6 +94,15 @@ class Tab {
             }
         }
         
+        int index(int element) {
+            for(int i = 0; i < number_of_elements; i++) {
+                if(array[i] == element) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        
     private:
         void resize() {
                 int* new_array = new int[size+=1];
