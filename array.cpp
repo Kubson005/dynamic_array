@@ -93,7 +93,7 @@ class Tab {
                 }
             }
         }
-        
+
         int index(int element) {
             for(int i = 0; i < number_of_elements; i++) {
                 if(array[i] == element) {
@@ -101,6 +101,20 @@ class Tab {
                 }
             }
             return -1;
+        }
+        void sort() {
+            bool flag = true;
+            while(flag) {
+                flag = false;
+                for(int i = 0; i < number_of_elements - 1; i++) {
+                    if(array[i] > array[i+1]) {
+                        int temp = array[i];
+                        array[i] = array[i+1];
+                        array[i+1] = temp;
+                        flag = true;
+                    }
+                }
+            }
         }
         
     private:
@@ -118,14 +132,14 @@ class Tab {
 
 int main() {
     Tab tablica(2);
-    tablica.append(1);
-    tablica.append(2);
-    tablica.append(3);
-    tablica.append(4);
     tablica.append(5);
+    tablica.append(4);
+    tablica.append(9);
+    tablica.append(2);
+    tablica.append(1);
     tablica.print();
     cout << "---------" << endl;
-    tablica.reverse();
+    tablica.sort();
     tablica.print();
 
     return 0;
